@@ -1,8 +1,9 @@
+import os
+
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import os
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -40,8 +41,8 @@ async def health_check():
                 "status": "healthy",
                 "service": "decision-first-runbooks-api",
                 "version": "1.0.0",
-            }
-        }
+            },
+        },
     )
 
 
@@ -54,11 +55,12 @@ async def api_health_check():
             "data": {
                 "status": "healthy",
                 "api_version": "1.0.0",
-            }
-        }
+            },
+        },
     )
 
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
