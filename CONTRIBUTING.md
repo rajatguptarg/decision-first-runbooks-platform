@@ -268,6 +268,15 @@ Collections:
 - Address feedback and update your branch as needed
 - Keep your branch up to date with the main branch
 
+### Continuous Integration (CI)
+
+All pull requests are automatically tested using GitHub Actions. The CI pipeline runs the following checks:
+
+- **Backend**: Lints, formats, and runs tests for the FastAPI application.
+- **Frontend**: Lints, tests, and builds the React application.
+
+Please ensure that all CI checks pass before requesting a review. You can see the status of the checks on your pull request page.
+
 ## Common Development Tasks
 
 ### Adding a New API Endpoint

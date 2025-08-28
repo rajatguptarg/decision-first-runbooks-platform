@@ -1,5 +1,7 @@
 # Decision First Runbooks Platform
 
+[![CI](https://github.com/Vibe-Inc/decision-first-runbooks-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Vibe-Inc/decision-first-runbooks-platform/actions/workflows/ci.yml)
+
 A production-ready implementation that manages and displays decision-first incident runbooks for effective incident response.
 
 ## Quick Start

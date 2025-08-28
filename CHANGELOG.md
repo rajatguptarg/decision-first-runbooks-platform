@@ -20,3 +20,4 @@ All notable changes to the Decision First Runbooks Platform will be documented i
   - Environment configuration templates for both backend and frontend
   - MongoDB initialization script with database schema and indexes
 - **Documentation**: Updated README.md with comprehensive setup instructions and development commands
+- **CI/CD**: Added GitHub Actions workflow for continuous integration
