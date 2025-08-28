@@ -5,6 +5,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from backend.services.database import db
+
 load_dotenv()
 
 app = FastAPI(
@@ -12,6 +14,17 @@ app = FastAPI(
     description="API for managing and executing decision-first runbooks",
     version="1.0.0",
 )
+
+
+@app.on_event("startup")
+async def startup_db_client():
+    await db.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    await db.disconnect()
+
 
 # CORS middleware
 app.add_middleware(

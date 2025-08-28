@@ -23,31 +23,31 @@ graph TB
         Router[React Router]
         State[State Management]
     end
-    
+
     subgraph "API Layer"
         FastAPI[FastAPI Server]
         Auth[JWT Authentication]
         Middleware[Request Middleware]
     end
-    
+
     subgraph "Business Logic"
         RunbookService[Runbook Service]
         SessionService[Session Service]
         ExecutionService[Execution Service]
         UserService[User Service]
     end
-    
+
     subgraph "Data Layer"
         MongoDB[(MongoDB)]
         Indexes[Search Indexes]
     end
-    
+
     subgraph "Execution Layer"
         DockerAPI[Docker Engine API]
         Containers[Container Instances]
         Volumes[Shared Volumes]
     end
-    
+
     UI --> FastAPI
     FastAPI --> RunbookService
     FastAPI --> SessionService
@@ -220,18 +220,18 @@ class Runbook(BaseModel):
     updated_at: datetime
     version: int
     tags: List[str] = []
-    
+
 class DecisionTree(BaseModel):
     root_node: DecisionNode
     nodes: Dict[str, Union[DecisionNode, ActionNode]]
-    
+
 class DecisionNode(BaseModel):
     id: str
     type: Literal["decision"]
     question: str
     description: str
     options: List[DecisionOption]
-    
+
 class ActionNode(BaseModel):
     id: str
     type: Literal["action"]
@@ -239,7 +239,7 @@ class ActionNode(BaseModel):
     description: str
     commands: List[Command]
     next_node_id: Optional[str]
-    
+
 class Command(BaseModel):
     command: str
     description: str
@@ -261,13 +261,13 @@ class Session(BaseModel):
     created_at: datetime
     updated_at: datetime
     completed_at: Optional[datetime]
-    
+
 class SessionStatus(str, Enum):
     ACTIVE = "active"
     PAUSED = "paused"
     COMPLETED = "completed"
     FAILED = "failed"
-    
+
 class TimelineEvent(BaseModel):
     id: str
     session_id: str
@@ -275,7 +275,7 @@ class TimelineEvent(BaseModel):
     timestamp: datetime
     user_id: str
     data: Dict[str, Any]
-    
+
 class EventType(str, Enum):
     SESSION_STARTED = "session_started"
     DECISION_MADE = "decision_made"
@@ -297,7 +297,7 @@ class User(BaseModel):
     created_at: datetime
     last_login: Optional[datetime]
     is_active: bool = True
-    
+
 class UserRole(str, Enum):
     VIEWER = "viewer"
     EDITOR = "editor"
@@ -315,12 +315,12 @@ class ExecutionEnvironment(BaseModel):
     volumes: List[VolumeMount] = []
     network_mode: str = "bridge"
     resource_limits: ResourceLimits
-    
+
 class ResourceLimits(BaseModel):
     memory_mb: int = 512
     cpu_limit: float = 1.0
     timeout_seconds: int = 3600
-    
+
 class VolumeMount(BaseModel):
     host_path: str
     container_path: str
@@ -468,7 +468,7 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
           pytest tests/ --cov=app
-  
+
   frontend-tests:
     runs-on: ubuntu-latest
     steps:

@@ -1,9 +1,9 @@
 """Runbook and decision tree models."""
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
-from .base import BaseDBModel
+from .base import BaseDBModel, PyObjectId
 from .enums import SeverityLevel
 from .execution_environment import ExecutionEnvironment
 
@@ -57,9 +57,36 @@ class Runbook(BaseDBModel):
 
     title: str
     description: str
-    owner_id: str
-    severity_level: SeverityLevel
+    owner_id: PyObjectId
+    severity: SeverityLevel
     execution_environment: ExecutionEnvironment
     decision_tree: DecisionTree
     version: int
     tags: list[str] = Field(default_factory=list)
+
+
+class RunbookCreate(BaseModel):
+    """Runbook creation model."""
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    title: str
+    description: str
+    owner_id: PyObjectId
+    severity: SeverityLevel
+    execution_environment: ExecutionEnvironment
+    decision_tree: DecisionTree
+    tags: list[str] = Field(default_factory=list)
+
+
+class RunbookUpdate(BaseModel):
+    """Runbook update model."""
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    title: str | None = None
+    description: str | None = None
+    severity: SeverityLevel | None = None
+    execution_environment: ExecutionEnvironment | None = None
+    decision_tree: DecisionTree | None = None
+    tags: list[str] | None = None
