@@ -42,6 +42,8 @@ The specs for the project can be found under `.kiro/specs/{feature-name}/` with 
 
 The files are concise but comprehensive, capturing the essential information needed for effective development while following the project's established patterns and conventions.
 
+Follow the `FE_DESIGN_STYLE.md` for design language for the front-end application. The Front-End MUST follow the design strictly.
+
 After making the changes, always perform the following:
 
 - Create or update the `CHANGELOG.md` file to reflect the changes made to the project.
