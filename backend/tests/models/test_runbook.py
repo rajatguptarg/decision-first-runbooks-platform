@@ -1,5 +1,6 @@
 """Unit tests for the Runbook model."""
 import pytest
+from bson import ObjectId
 from pydantic import ValidationError
 
 from backend.models.enums import SeverityLevel
@@ -63,8 +64,8 @@ def test_runbook_creation(sample_execution_environment, sample_decision_tree):
     runbook_data = {
         "title": "Service Down",
         "description": "A runbook for when the main service is down.",
-        "owner_id": "user123",
-        "severity_level": SeverityLevel.CRITICAL,
+        "owner_id": ObjectId(),
+        "severity": SeverityLevel.CRITICAL,
         "execution_environment": sample_execution_environment,
         "decision_tree": sample_decision_tree,
         "version": 1,
@@ -74,7 +75,7 @@ def test_runbook_creation(sample_execution_environment, sample_decision_tree):
 
     assert runbook.title == runbook_data["title"]
     assert runbook.owner_id == runbook_data["owner_id"]
-    assert runbook.severity_level == SeverityLevel.CRITICAL
+    assert runbook.severity == SeverityLevel.CRITICAL
     assert runbook.version == 1
     assert runbook.tags == ["critical", "service-down"]
     assert isinstance(runbook.decision_tree, DecisionTree)
@@ -87,8 +88,8 @@ def test_runbook_missing_required_fields(sample_execution_environment):
     with pytest.raises(ValidationError):
         Runbook(
             title="Incomplete Runbook",
-            owner_id="user123",
-            severity_level=SeverityLevel.LOW,
+            owner_id=ObjectId(),
+            severity=SeverityLevel.LOW,
             execution_environment=sample_execution_environment,
         )
 

@@ -11,14 +11,14 @@ def test_user_creation():
     user_data = {
         "username": "testuser",
         "email": "test@example.com",
-        "hashed_password": "secret_password",
+        "password_hash": "secret_password",
         "role": UserRole.EDITOR,
     }
     user = User(**user_data)
 
     assert user.username == user_data["username"]
     assert user.email == user_data["email"]
-    assert user.hashed_password == user_data["hashed_password"]
+    assert user.password_hash == user_data["password_hash"]
     assert user.role == user_data["role"]
     assert user.is_active is True
     assert user.last_login is None
@@ -29,7 +29,7 @@ def test_user_creation_defaults():
     user = User(
         username="testuser",
         email="test@example.com",
-        hashed_password="abc",
+        password_hash="abc",
         role=UserRole.VIEWER,
     )
     assert user.is_active is True
@@ -40,7 +40,7 @@ def test_user_missing_required_fields():
     """Test that validation fails for missing required fields."""
     with pytest.raises(ValidationError) as excinfo:
         User(username="testuser", email="test@example.com", role=UserRole.VIEWER)
-    assert "hashed_password" in str(excinfo.value)
+    assert "password_hash" in str(excinfo.value)
 
 
 def test_user_invalid_role():
@@ -49,7 +49,7 @@ def test_user_invalid_role():
         User(
             username="testuser",
             email="test@example.com",
-            hashed_password="abc",
+            password_hash="abc",
             role="invalid_role",
         )
     assert "role" in str(excinfo.value)
@@ -63,7 +63,7 @@ def test_user_invalid_email():
     user = User(
         username="testuser",
         email="not-an-email",
-        hashed_password="abc",
+        password_hash="abc",
         role=UserRole.VIEWER,
     )
     assert user.email == "not-an-email"

@@ -2,6 +2,7 @@
 from datetime import datetime
 
 import pytest
+from bson import ObjectId
 from pydantic import ValidationError
 
 from backend.models.enums import EventType, SessionStatus
@@ -11,9 +12,9 @@ from backend.models.session import Session, TimelineEvent
 def test_timeline_event_creation():
     """Test successful TimelineEvent model creation."""
     event_data = {
-        "session_id": "session123",
+        "session_id": ObjectId(),
         "event_type": EventType.SESSION_STARTED,
-        "user_id": "user123",
+        "user_id": ObjectId(),
         "data": {"message": "Session has begun."},
     }
     event = TimelineEvent(**event_data)
@@ -28,8 +29,8 @@ def test_timeline_event_creation():
 def test_session_creation():
     """Test successful Session model creation."""
     session_data = {
-        "runbook_id": "runbook123",
-        "user_id": "user123",
+        "runbook_id": ObjectId(),
+        "user_id": ObjectId(),
         "status": SessionStatus.ACTIVE,
         "current_node_id": "node1",
         "execution_path": ["node0", "node1"],
@@ -48,8 +49,8 @@ def test_session_creation():
 def test_session_defaults():
     """Test that default values are set correctly for Session."""
     session = Session(
-        runbook_id="runbook123",
-        user_id="user123",
+        runbook_id=ObjectId(),
+        user_id=ObjectId(),
         status=SessionStatus.ACTIVE,
         current_node_id="node1",
     )
@@ -62,8 +63,8 @@ def test_session_invalid_status():
     """Test that validation fails for an invalid status."""
     with pytest.raises(ValidationError):
         Session(
-            runbook_id="runbook123",
-            user_id="user123",
+            runbook_id=ObjectId(),
+            user_id=ObjectId(),
             status="invalid_status",
             current_node_id="node1",
         )

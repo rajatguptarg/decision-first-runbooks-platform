@@ -9,6 +9,14 @@ on:
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: password123
+        ports:
+          - 27017:27017
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.11

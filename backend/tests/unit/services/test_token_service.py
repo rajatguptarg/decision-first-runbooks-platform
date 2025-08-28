@@ -22,7 +22,7 @@ def test_token_expiration():
     data = {"sub": "testuser"}
     token = token_service.create_access_token(data, expires_delta=timedelta(seconds=1))
 
-    time.sleep(1.5)
+    time.sleep(2)
 
     decoded_payload = token_service.decode_token(token)
     assert decoded_payload is None
