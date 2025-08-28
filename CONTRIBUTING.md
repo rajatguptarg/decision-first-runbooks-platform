@@ -33,7 +33,7 @@ Thank you for your interest in contributing to the Decision First Runbooks Platf
    cp backend/.env.example backend/.env
    cp frontend/.env.example frontend/.env
    ```
-   
+
    Edit the `.env` files as needed for your local development environment.
 
 3. **Start the development environment:**
@@ -86,7 +86,7 @@ npm run dev
    python -m pytest
    ruff check .
    black --check .
-   
+
    # Frontend
    cd frontend
    npm test
@@ -119,7 +119,7 @@ npm run dev
   ```python
   # Success
   {"ok": True, "data": <response_data>}
-  
+
   # Error
   {"ok": False, "error": {"code": "string", "message": "string", "details": "optional"}}
   ```
@@ -171,16 +171,14 @@ frontend/src/
 ### Backend Testing
 
 ```bash
-cd backend
-
-# Run all tests
+# Run all tests from the project root
 python -m pytest
 
 # Run specific test file
-python -m pytest tests/test_runbooks.py -v
+python -m pytest backend/tests/test_runbooks.py -v
 
 # Run with coverage
-python -m pytest --cov=. --cov-report=html
+python -m pytest --cov=backend --cov-report=html
 ```
 
 #### Test Structure
