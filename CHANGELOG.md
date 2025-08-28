@@ -23,3 +23,9 @@ All notable changes to the Decision First Runbooks Platform will be documented i
   - MongoDB initialization script with database schema and indexes
 - **Documentation**: Updated README.md with comprehensive setup instructions and development commands
 - **CI/CD**: Added GitHub Actions workflow for continuous integration
+
+### Fixed
+- **Backend CI**: Resolved multiple test failures in the backend CI pipeline.
+  - Fixed Pydantic validation errors in model tests by correcting field names and using `ObjectId` for ID fields.
+  - Updated the GitHub Actions workflow to properly configure a MongoDB service for integration tests.
+  - Addressed a flaky token expiration test by increasing the sleep duration.
