@@ -5,9 +5,11 @@ All notable changes to the Decision First Runbooks Platform will be documented i
 ## [Unreleased]
 
 ### Added
+- **Data Models**: Implemented core Pydantic models for User, Runbook, Session, and ExecutionEnvironment with validation.
+- **Unit Tests**: Added comprehensive unit tests for all new data models.
 - **Project Structure**: Created comprehensive directory structure for both backend (FastAPI) and frontend (React) applications
 - **Docker Compose Setup**: Multi-service development environment with MongoDB, backend, and frontend services
-- **Development Tooling**: 
+- **Development Tooling**:
   - Pre-commit hooks configuration with Black, Ruff, ESLint, and Prettier
   - Python linting and formatting with pyproject.toml configuration
   - Enhanced .gitignore patterns for Python and Node.js
