@@ -41,6 +41,8 @@ Thank you for your interest in contributing to the Decision First Runbooks Platf
    docker-compose up --build
    ```
 
+   The Compose setup mounts the repository root into the backend container and starts the API with `uvicorn backend.app:app` so Python can import the `backend` package correctly.
+
 4. **Access the application:**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000
@@ -60,6 +62,8 @@ pip install -r requirements.txt
 # Start MongoDB (ensure it's running on localhost:27017)
 # Then start the backend
 uvicorn app:app --reload
+# Alternatively, if running from the repository root, use:
+# uvicorn backend.app:app --reload
 ```
 
 #### Frontend Setup

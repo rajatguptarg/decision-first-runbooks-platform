@@ -30,6 +30,9 @@ cp frontend/.env.example frontend/.env
 docker-compose up --build
 ```
 
+Notes:
+- Docker Compose now mounts the repository root into the container and runs the app via `uvicorn backend.app:app`. This ensures the Python package `backend` is importable and fixes ModuleNotFoundError issues.
+
 4. Access the application:
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
@@ -43,7 +46,10 @@ cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+# When running from the backend folder, use:
 uvicorn app:app --reload
+# When running from the repository root, use:
+# uvicorn backend.app:app --reload
 ```
 
 #### Frontend

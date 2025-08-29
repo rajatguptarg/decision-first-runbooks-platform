@@ -4,6 +4,12 @@ All notable changes to the Decision First Runbooks Platform will be documented i
 
 ## [Unreleased]
 
+### Fixed
+- Resolve `ModuleNotFoundError: No module named 'backend'` when running backend via Docker Compose by:
+  - Mounting the repository root (`./`) into the backend container instead of `./backend`.
+  - Running Uvicorn with `backend.app:app` so the `backend` package is importable.
+  - Adding `backend/__init__.py` to explicitly mark the package.
+
 ### Added
 - **Data Models**: Implemented core Pydantic models for User, Runbook, Session, and ExecutionEnvironment with validation.
 - **Unit Tests**: Added comprehensive unit tests for all new data models.
